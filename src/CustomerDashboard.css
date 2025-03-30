@@ -1,0 +1,74 @@
+/* CustomerDashboard.css */
+.dashboard-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.dashboard-title {
+  color: #2c3e50;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.account-info {
+  background: #f7f7f7;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.account-info p {
+  margin: 5px 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn {
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.withdraw {
+  background: #e74c3c;
+  color: white;
+}
+
+.deposit {
+  background: #27ae60;
+  color: white;
+}
+
+.transfer {
+  background: #f39c12;
+  color: white;
+}
+
+.transactions {
+  background: #3498db;
+  color: white;
+}
+
+.logout {
+  background: #34495e;
+  color: white;
+  margin-top: 15px;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
