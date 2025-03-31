@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useWithdrawMutation } from "./apislice";
+import { useDepositMutation } from "./apislice";
 
-function Withdraw({ user,updatebalance, onClose }) {
+function Deposit({ user, updatebalance, onClose }) {
   const [amount, setAmount] = useState("");
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
-  const [withdraw, { isLoading }] = useWithdrawMutation();
+  const [deposit, { isLoading }] = useDepositMutation();
 
-  const handleWithdraw = async () => {
+  const handleDeposit = async () => {
     if (!amount || isNaN(amount) || amount <= 0) {
       setError("Please enter a valid amount.");
       return;
@@ -17,7 +17,7 @@ function Withdraw({ user,updatebalance, onClose }) {
     setMessage(null);
 
     try {
-      const response = await withdraw({
+      const response = await deposit({
         userid: String(user.userid),
         password: user.password,
         amount: String(amount),
@@ -26,16 +26,16 @@ function Withdraw({ user,updatebalance, onClose }) {
       updatebalance(response.balance);
       setMessage(response.message);
       setAmount(""); // Clear input field after successful withdrawal
-      alert("withdraw Succesfully");
+      alert("Deposit Succesfully");
     } catch (err) {
-      setError(err.data?.error || "Withdrawal failed. Try again.");
+      setError(err.data?.error || "Deposit failed. Try again.");
     }
   };
 
   return (
     <div className="modal">
       <div className="modal-content">
-        <h3>Withdraw Money</h3>
+        <h3>Deposit Money</h3>
         {error && <p className="error-message">{error}</p>}
         {message && <p className="success-message">{message}</p>}
 
@@ -45,8 +45,8 @@ function Withdraw({ user,updatebalance, onClose }) {
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
-        <button onClick={handleWithdraw} disabled={isLoading}>
-          {isLoading ? "Processing..." : "Withdraw"}
+        <button onClick={handleDeposit} disabled={isLoading}>
+          {isLoading ? "Processing..." : "Deposit"}
         </button>
         <button className="close-btn" onClick={onClose}>
           Close
@@ -56,4 +56,4 @@ function Withdraw({ user,updatebalance, onClose }) {
   );
 }
 
-export default Withdraw;
+export default Deposit;

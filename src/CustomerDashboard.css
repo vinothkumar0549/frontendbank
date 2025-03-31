@@ -44,27 +44,27 @@
 }
 
 .withdraw {
-  background: #e74c3c;
+  background: #007bff;
   color: white;
 }
 
 .deposit {
-  background: #27ae60;
+  background: #007bff;
   color: white;
 }
 
 .transfer {
-  background: #f39c12;
+  background: #007bff;
   color: white;
 }
 
 .transactions {
-  background: #3498db;
+  background: #007bff;
   color: white;
 }
 
 .logout {
-  background: #34495e;
+  background: #007bff;
   color: white;
   margin-top: 15px;
 }

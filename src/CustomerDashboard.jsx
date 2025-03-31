@@ -1,9 +1,17 @@
 import React, { useState } from "react";
-import "./CustomerDashboard.css"; // Import the CSS file
+import "./CustomerDashboard.css";
 import Withdraw from "./Withdraw";
+import Deposit from "./Deposit";
+import MoneyTransfer from "./MoneyTransfer"
+import GetActivity from "./GetActivity";
 
 function CustomerDashboard({ user, onLogout }) {
+
+  const [balance , setBalance] = useState(String(user.balance));
   const [showWithdraw, setShowWithdraw] = useState(false);
+  const [showDeposit, setShowDeposit] = useState(false);
+  const [showMoneytransfer, setShowMoneytransfer] = useState(false);
+  const [showGetActivity, setShowGetActivity] = useState(false);
 
   return (
     <>
@@ -18,7 +26,7 @@ function CustomerDashboard({ user, onLogout }) {
             <strong>Customer ID:</strong> {user.userid}
           </p>
           <p>
-            <strong>Balance:</strong> &#8377; {user.balance}
+            <strong>Balance:</strong> &#8377; {balance}
           </p>
         </div>
 
@@ -31,23 +39,19 @@ function CustomerDashboard({ user, onLogout }) {
           </button>
           <button
             className="btn deposit"
-            onClick={() => alert("Deposit function not implemented yet.")}
+            onClick={() => setShowDeposit(true)}
           >
             Deposit
           </button>
           <button
             className="btn transfer"
-            onClick={() =>
-              alert("Money transfer function not implemented yet.")
-            }
+            onClick={() => setShowMoneytransfer(true)}
           >
             Money Transfer
           </button>
           <button
             className="btn transactions"
-            onClick={() =>
-              alert("Print transactions function not implemented yet.")
-            }
+            onClick={() => setShowGetActivity(true)}
           >
             Print Transactions
           </button>
@@ -58,7 +62,16 @@ function CustomerDashboard({ user, onLogout }) {
         </button>
       </div>
       {showWithdraw && (
-        <Withdraw user={user} onClose={() => setShowWithdraw(false)} />
+        <Withdraw user={user} updatebalance= {setBalance} onClose={() => setShowWithdraw(false)} />
+      )}
+      {showDeposit && (
+        <Deposit user={user} updatebalance= {setBalance} onClose={() => setShowDeposit(false)} />
+      )}
+      {showMoneytransfer && (
+        <MoneyTransfer user={user} updatebalance= {setBalance} onClose={() => setShowMoneytransfer(false)} />
+      )}
+      {showGetActivity && (
+        <GetActivity user={user} onClose={() => setShowGetActivity(false)} />
       )}
     </>
   );

@@ -1,7 +1,13 @@
-import React from "react";
+import React ,{useState} from "react";
 import "./AdminDashboard.css";
+import GetActivity from "./GetActivity"
+
 function AdminDashboard({ user, onLogout }) {
+
+  const [showGetActivity, setShowGetActivity] = useState(false);
+  
   return (
+    <>
     <div className="dashboard-container">
       <h2>Admin: {user.name}</h2>
       <p>Admin Customer ID: {user.userid}</p>
@@ -14,15 +20,17 @@ function AdminDashboard({ user, onLogout }) {
         Get Top N Customers
       </button>
       <button
-        onClick={() =>
-          alert("Print Transactions function not implemented yet.")
-        }
+        onClick={() => setShowGetActivity(true)}
       >
         Print Transactions
       </button>
 
       <button onClick={onLogout}>Logout</button>
     </div>
+    {showGetActivity && (
+      <GetActivity user={user} onClose={() => setShowGetActivity(false)} />
+    )}
+    </>
   );
 }
 

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { useWithdrawMutation } from "./apislice";
+import { useMoneytransferMutation } from "./apislice";
 
-function Withdraw({ user,updatebalance, onClose }) {
+function MoneyTransfer({ user, updatebalance, onClose }) {
   const [amount, setAmount] = useState("");
+  const [receiverid, setReceiverid] = useState("");
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
-  const [withdraw, { isLoading }] = useWithdrawMutation();
+  const [moneytransfer, { isLoading }] = useMoneytransferMutation();
 
-  const handleWithdraw = async () => {
+  const handleMoneyTransfer = async () => {
     if (!amount || isNaN(amount) || amount <= 0) {
       setError("Please enter a valid amount.");
       return;
@@ -17,8 +18,9 @@ function Withdraw({ user,updatebalance, onClose }) {
     setMessage(null);
 
     try {
-      const response = await withdraw({
+      const response = await moneytransfer({
         userid: String(user.userid),
+        receiverid: receiverid,
         password: user.password,
         amount: String(amount),
       }).unwrap();
@@ -26,27 +28,32 @@ function Withdraw({ user,updatebalance, onClose }) {
       updatebalance(response.balance);
       setMessage(response.message);
       setAmount(""); // Clear input field after successful withdrawal
-      alert("withdraw Succesfully");
+      alert("MoneyTransfer Succesfully");
     } catch (err) {
-      setError(err.data?.error || "Withdrawal failed. Try again.");
+      setError(err.data?.error || "MoneyTransfer failed. Try again.");
     }
   };
 
   return (
     <div className="modal">
       <div className="modal-content">
-        <h3>Withdraw Money</h3>
+        <h3>Deposit Money</h3>
         {error && <p className="error-message">{error}</p>}
         {message && <p className="success-message">{message}</p>}
-
+        <input
+          type="text"
+          placeholder="Enter Receiver Id"
+          value={receiverid}
+          onChange={(e) => setReceiverid(e.target.value)}
+        />
         <input
           type="number"
           placeholder="Enter Amount"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
-        <button onClick={handleWithdraw} disabled={isLoading}>
-          {isLoading ? "Processing..." : "Withdraw"}
+        <button onClick={handleMoneyTransfer} disabled={isLoading}>
+          {isLoading ? "Processing..." : "MoneyTransfer"}
         </button>
         <button className="close-btn" onClick={onClose}>
           Close
@@ -56,4 +63,4 @@ function Withdraw({ user,updatebalance, onClose }) {
   );
 }
 
-export default Withdraw;
+export default MoneyTransfer;

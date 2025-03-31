@@ -27,8 +27,36 @@ export const apiSlice = createApi({
         body: withdrawData,
       }),
     }),
+    deposit: builder.mutation({
+      query: (depositData) => ({
+        url: "/deposit",
+        method: "POST",
+        body: depositData,
+      })
+    }),
+    moneytransfer: builder.mutation({
+      query: (moneytransferData) => ({
+        url: "/moneytransfer",
+        method: "POST",
+        body: moneytransferData,
+      })
+    }),
+    getactivity: builder.mutation({
+      query: (getactivityData) => ({
+        url: "/getactivity",
+        method: "POST",
+        body: getactivityData,
+      }),
+       transformResponse: (response) => response.Activity || [] // Ensure array
+    })
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useWithdrawMutation } =
-  apiSlice;
+export const { 
+  useLoginMutation, 
+  useRegisterMutation, 
+  useWithdrawMutation, 
+  useDepositMutation, 
+  useMoneytransferMutation, 
+  useGetactivityMutation
+ } = apiSlice;
