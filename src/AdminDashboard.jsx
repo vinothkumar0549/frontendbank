@@ -1,10 +1,11 @@
 import React ,{useState} from "react";
 import "./AdminDashboard.css";
 import GetActivity from "./GetActivity"
-
+import TopNCustomer from "./TopNCustomer"
 function AdminDashboard({ user, onLogout }) {
 
   const [showGetActivity, setShowGetActivity] = useState(false);
+  const [showTopNCustomer, setShowTopNCustomer] = useState(false);
   
   return (
     <>
@@ -13,9 +14,7 @@ function AdminDashboard({ user, onLogout }) {
       <p>Admin Customer ID: {user.userid}</p>
 
       <button
-        onClick={() =>
-          alert("Get Top N Customers function not implemented yet.")
-        }
+        onClick={() => setShowTopNCustomer(true)}
       >
         Get Top N Customers
       </button>
@@ -29,6 +28,9 @@ function AdminDashboard({ user, onLogout }) {
     </div>
     {showGetActivity && (
       <GetActivity user={user} onClose={() => setShowGetActivity(false)} />
+    )}
+    {showTopNCustomer && (
+      <TopNCustomer user={user} onClose={() => setShowTopNCustomer(false)} />
     )}
     </>
   );

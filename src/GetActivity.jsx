@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useGetactivityMutation } from "./apislice"; // Import RTK API slice
 import "./GetActivity.css";
 
-const ActivityComponent = ({ user, onClose }) => {
+const GetActivity = ({ user, onClose }) => {
   const [getActivities, { data, error, isLoading }] = useGetactivityMutation();
 
   useEffect(() => {
@@ -51,4 +51,4 @@ const ActivityComponent = ({ user, onClose }) => {
   );
 };
 
-export default ActivityComponent;
+export default GetActivity;

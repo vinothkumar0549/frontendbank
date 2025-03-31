@@ -48,6 +48,14 @@ export const apiSlice = createApi({
         body: getactivityData,
       }),
        transformResponse: (response) => response.Activity || [] // Ensure array
+    }),
+    topncustomer: builder.mutation({
+      query: (topncustomerData) => ({
+        url: "/topncustomer",
+        method: "POST",
+        body: topncustomerData,
+      }),
+      transformResponse: (response) => response.Users || [] // Ensure array
     })
   }),
 });
@@ -58,5 +66,6 @@ export const {
   useWithdrawMutation, 
   useDepositMutation, 
   useMoneytransferMutation, 
-  useGetactivityMutation
+  useGetactivityMutation,
+  useTopncustomerMutation
  } = apiSlice;
