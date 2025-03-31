@@ -26,7 +26,7 @@ const GetActivity = ({ user, onClose }) => {
               <div>Amount</div>
               <div>Account From</div>
               <div>Account To</div>
-              <div>Date and Time</div>
+              <div>Date</div>
             </li>
             {data.map((activity) => (
               <li className="transaction-item" key={activity.activityid}>

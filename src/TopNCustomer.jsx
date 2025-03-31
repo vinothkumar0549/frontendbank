@@ -1,22 +1,36 @@
-import React, { useEffect } from "react";
-import { useTopncustomerMutation } from "./apislice"; // Import RTK API slice
+import React, { useState } from "react";
+import { useTopncustomerMutation } from "./apislice";
 import "./TopNCustomer.css";
 
 const TopnCustomer = ({ user, onClose }) => {
   const [topncustomer, { data, error, isLoading }] = useTopncustomerMutation();
-
-  useEffect(() => {
-      topncustomer({
-        userid: String(user.userid),
-        password: user.password,
-        "no": "1"
-      });
-  }, [user, topncustomer]);
+  const [no, setNo] = useState(""); 
+  const handleSubmit = () => {
+    if (no.trim() === "") return; 
+    topncustomer({
+      userid: String(user.userid),
+      password: user.password,
+      no: String(no), 
+    });
+  };
 
   return (
     <div className="user-container">
       <h2>Top Customers</h2>
-      {isLoading && <p>Loading...</p>}
+
+      {/* Input for 'no' value */}
+      <div className="input-group">
+        <input
+          type="number"
+          placeholder="Enter N"
+          value={no}
+          onChange={(e) => setNo(e.target.value)}
+        />
+        <button onClick={handleSubmit} disabled={isLoading}>
+          {isLoading ? "Loading..." : "Get Top N"}
+        </button>
+      </div>
+
       {error && <p className="error">Error: {error.message}</p>}
       {data?.length > 0 ? (
         <div className="user-list-container">
@@ -42,10 +56,14 @@ const TopnCustomer = ({ user, onClose }) => {
       ) : (
         !isLoading && <p>No Users</p>
       )}
-      
+
       <button className="close-btn" onClick={onClose}>Close</button>
     </div>
   );
 };
 
 export default TopnCustomer;
+
+
+
+

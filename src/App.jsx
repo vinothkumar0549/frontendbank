@@ -1,12 +1,11 @@
+
 import { useState } from "react";
 import { useLoginMutation, useRegisterMutation } from "./apislice";
-import { useNavigate } from "react-router-dom";
 import CustomerDashboard from "./CustomerDashboard";
 import AdminDashboard from "./AdminDashboard";
 import "./App.css";
 
 function App() {
-  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [role, setRole] = useState("customer");
   const [formData, setFormData] = useState({

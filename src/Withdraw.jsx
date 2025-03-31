@@ -45,9 +45,11 @@ function Withdraw({ user,updatebalance, onClose }) {
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
+        <br />
         <button onClick={handleWithdraw} disabled={isLoading}>
           {isLoading ? "Processing..." : "Withdraw"}
         </button>
+        <br />
         <button className="close-btn" onClick={onClose}>
           Close
         </button>

@@ -46,15 +46,18 @@ function MoneyTransfer({ user, updatebalance, onClose }) {
           value={receiverid}
           onChange={(e) => setReceiverid(e.target.value)}
         />
+        <br />
         <input
           type="number"
           placeholder="Enter Amount"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
+        <br />
         <button onClick={handleMoneyTransfer} disabled={isLoading}>
           {isLoading ? "Processing..." : "MoneyTransfer"}
         </button>
+        <br />
         <button className="close-btn" onClick={onClose}>
           Close
         </button>
