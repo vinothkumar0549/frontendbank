@@ -21,7 +21,7 @@ function AdminDashboard({ user, onLogout }) {
     <div className="dashboard-container">
       <div className="top-section">
         <h2>Welcome, {user.name}</h2>
-        <p><strong>Account No:</strong> {user.accountno}</p>
+        {/* <p><strong>Account No:</strong> {user.accountno}</p> */}
         <p><strong>Customer ID:</strong> {user.userid}</p>
       </div>
       <div className="main-content">

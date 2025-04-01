@@ -47,13 +47,13 @@
   background-color: #0056b3;
 }
 
-.btn.logout {
+/* .btn.logout {
   background-color: #dc3545;
 }
 
 .btn.logout:hover {
   background-color: #a71d2a;
-}
+} */
 
 .content-area {
   flex: 1;
