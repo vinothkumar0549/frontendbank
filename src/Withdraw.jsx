@@ -3,7 +3,7 @@ import { useWithdrawMutation } from "./apislice";
 
 function Withdraw({ user,updatebalance, onClose }) {
   const [amount, setAmount] = useState("");
-  const [message, setMessage] = useState(null);
+  // const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
   const [withdraw, { isLoading }] = useWithdrawMutation();
 
@@ -14,7 +14,7 @@ function Withdraw({ user,updatebalance, onClose }) {
     }
 
     setError(null);
-    setMessage(null);
+    // setMessage(null);
 
     try {
       const response = await withdraw({
@@ -24,7 +24,7 @@ function Withdraw({ user,updatebalance, onClose }) {
       }).unwrap();
       console.log(response);
       updatebalance(response.balance);
-      setMessage(response.message);
+      // setMessage(response.message);
       setAmount(""); // Clear input field after successful withdrawal
       alert("withdraw Succesfully");
     } catch (err) {
@@ -37,7 +37,7 @@ function Withdraw({ user,updatebalance, onClose }) {
       <div className="modal-content">
         <h3>Withdraw Money</h3>
         {error && <p className="error-message">{error}</p>}
-        {message && <p className="success-message">{message}</p>}
+        {/* {message && <p className="success-message">{message}</p>} */}
 
         <input
           type="number"

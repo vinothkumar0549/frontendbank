@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { useLoginMutation, useRegisterMutation } from "./apislice";
+import { useLoginMutation, useRegisterMutation, useLogoutMutation } from "./apislice";
 import CustomerDashboard from "./CustomerDashboard";
 import AdminDashboard from "./AdminDashboard";
 import "./App.css";
@@ -18,6 +18,7 @@ function App() {
 
   const [login, { isLoading: loginLoading }] = useLoginMutation();
   const [register, { isLoading: registerLoading }] = useRegisterMutation();
+  const [logout] = useLogoutMutation();
 
   const toggleForm = () => setIsLogin(!isLogin);
 
@@ -51,11 +52,22 @@ function App() {
     }
   };
 
+  const handleLogout = async () =>{
+    try {
+      await logout({userid: String(user.userid), password: user.password}).unwrap(); // Call logout API
+      setUser(null); // Reset user state
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+    
+  };
+  
+
   if (user) {
     return user.role === "customer" ? (
-      <CustomerDashboard user={user} onLogout={() => setUser(null)} />
+      <CustomerDashboard user={user} onLogout={handleLogout} />
     ) : (
-      <AdminDashboard user={user} onLogout={() => setUser(null)} />
+      <AdminDashboard user={user} onLogout={handleLogout} />
     );
   }
 

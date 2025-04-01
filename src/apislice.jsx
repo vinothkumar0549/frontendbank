@@ -56,6 +56,13 @@ export const apiSlice = createApi({
         body: topncustomerData,
       }),
       transformResponse: (response) => response.Users || [] // Ensure array
+    }),
+    logout: builder.mutation({
+      query:(logoutData) => ({
+        url: "/logout",
+        method:"POST",
+        body: logoutData
+      })
     })
   }),
 });
@@ -67,5 +74,6 @@ export const {
   useDepositMutation, 
   useMoneytransferMutation, 
   useGetactivityMutation,
-  useTopncustomerMutation
+  useTopncustomerMutation,
+  useLogoutMutation
  } = apiSlice;
