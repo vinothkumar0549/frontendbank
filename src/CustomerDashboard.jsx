@@ -4,6 +4,7 @@ import Withdraw from "./Withdraw";
 import Deposit from "./Deposit";
 import MoneyTransfer from "./MoneyTransfer";
 import GetActivity from "./GetActivity";
+import GetTransaction from "./GetTransaction";
 
 function CustomerDashboard({ user, onLogout }) {
   const [balance, setBalance] = useState(String(user.balance));
@@ -19,6 +20,8 @@ function CustomerDashboard({ user, onLogout }) {
         return <MoneyTransfer user={user} updatebalance={setBalance} onClose={() => setActiveComponent(null)} />;
       case "activity":
         return <GetActivity user={user} onClose={() => setActiveComponent(null)} />;
+      case "transaction":
+        return <GetTransaction user={user} onClose={() => setActiveComponent(null)} />;
       default:
         return <p>Select an operation from the left.</p>;
     }
@@ -39,7 +42,8 @@ function CustomerDashboard({ user, onLogout }) {
           <button className="btn" onClick={() => setActiveComponent("withdraw")}>Withdraw</button>
           <button className="btn" onClick={() => setActiveComponent("deposit")}>Deposit</button>
           <button className="btn" onClick={() => setActiveComponent("transfer")}>Money Transfer</button>
-          <button className="btn" onClick={() => setActiveComponent("activity")}>Print Transactions</button>
+          <button className="btn" onClick={() => setActiveComponent("transaction")}>Print Transactions</button>
+          <button className="btn" onClick={() => setActiveComponent("activity")}>Print Activity</button>
           <button className="btn logout" onClick={onLogout}>Logout</button>
         </div>
         <div className="content-area">
