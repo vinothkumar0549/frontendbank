@@ -12,6 +12,8 @@ function App() {
     customerId: "",
     name: "",
     password: "",
+    mobilenumber: "",
+    aadhaar: "",
   });
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
@@ -42,6 +44,8 @@ function App() {
           name: formData.name,
           password: formData.password,
           role,
+          mobilenumber: formData.mobilenumber,
+          aadhaar: formData.aadhaar,
         }).unwrap();
         alert("userid: " + response.userId);
         setIsLogin(true);
@@ -86,6 +90,10 @@ function App() {
                 placeholder="Enter Customer ID"
                 value={formData.customerId}
                 onChange={handleChange}
+                max={4}
+                pattern="\d{4}" 
+                title="Enter Four Digit Customer ID" 
+
                 required
               />
             </div>
@@ -97,6 +105,10 @@ function App() {
                 placeholder="Enter password"
                 value={formData.password}
                 onChange={handleChange}
+                min={8}
+                max={15}
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$"
+                title="Must Contains A-Z, a-z, 0-9, @$!%*?&" 
                 required
               />
             </div>
@@ -111,6 +123,9 @@ function App() {
                 placeholder="Enter name"
                 value={formData.name}
                 onChange={handleChange}
+                max={25}
+                pattern="[A-Za-z]+"
+                title="Only alphabets (A-Z or a-z) are allowed"
                 required
               />
             </div>
@@ -122,6 +137,36 @@ function App() {
                 placeholder="Enter password"
                 value={formData.password}
                 onChange={handleChange}
+                min={8}
+                max={15}
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$"
+                title="Must Contains A-Z, a-z, 0-9, @$!%*?&" 
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Mobile Number</label>
+              <input
+                type="text"
+                name="mobilenumber"
+                placeholder="Enter Mobile Number"
+                value={formData.mobilenumber}
+                onChange={handleChange}
+                pattern="\d{10}"
+                title="Enter Ten Digits Mobile Number"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Aadhaar Number</label>
+              <input
+                type="text"
+                name="aadhaar"
+                placeholder="Enter Aadhaar Number"
+                value={formData.aadhaar}
+                onChange={handleChange}
+                pattern="\d{12}"
+                title="Enter Your Aadhaar Number"
                 required
               />
             </div>

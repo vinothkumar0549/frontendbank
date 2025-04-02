@@ -23,6 +23,8 @@ function AdminDashboard({ user, onLogout }) {
         <h2>Welcome, {user.name}</h2>
         {/* <p><strong>Account No:</strong> {user.accountno}</p> */}
         <p><strong>Customer ID:</strong> {user.userid}</p>
+        <p><strong>Mobile Number: </strong>{user.mobilenumber}</p>
+        <p><strong>Aadhaar No: </strong>{user.aadhaar}</p>
       </div>
       <div className="main-content">
         <div className="sidebar">

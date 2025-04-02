@@ -31,6 +31,8 @@ function CustomerDashboard({ user, onLogout }) {
         <p><strong>Account No:</strong> {user.accountno}</p>
         <p><strong>Customer ID:</strong> {user.userid}</p>
         <p><strong>Balance:</strong> &#8377; {balance}</p>
+        <p><strong>Mobile Number: </strong>{user.mobilenumber}</p>
+        <p><strong>Aadhaar No: </strong>{user.aadhaar}</p>
       </div>
       <div className="main-content">
         <div className="sidebar">
