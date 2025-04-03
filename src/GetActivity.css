@@ -61,6 +61,8 @@
   } */
 
   .transaction-details div {
+    /* margin-left: 70px;
+    margin-right: 70px; */
     text-align: center;
     padding: 5px;
     word-wrap: break-word;
@@ -68,7 +70,7 @@
   
  
   .transaction-item div {
-    min-width: 150px; /* Adjust as needed */
+    min-width: 150; /* Adjust as needed */
   }
   
   
