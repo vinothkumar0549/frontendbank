@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useGetactivityMutation, useGettransactionMutation } from "./apislice"; // Import RTK API slice
+import { useGettransactionMutation } from "./apislice"; // Import RTK API slice
 import "./GetTransaction.css";
 
 const GetTransaction = ({ user, onClose }) => {

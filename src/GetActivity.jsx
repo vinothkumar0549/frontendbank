@@ -23,9 +23,6 @@ const GetActivity = ({ user, onClose }) => {
             <li className="transaction-item transaction-header">
               <div>Activity ID</div>
               <div>Type</div>
-              <div>Amount</div>
-              <div>Account From</div>
-              <div>Account To</div>
               <div>Date</div>
             </li>
             {data.map((activity) => (
@@ -33,9 +30,6 @@ const GetActivity = ({ user, onClose }) => {
                 <div className="transaction-details">
                   <div>{activity.activityid}</div>
                   <div>{activity.activity}</div>
-                  <div>{activity.amount}</div>
-                  <div>{activity.accountfrom}</div>
-                  <div>{activity.accountto}</div>
                   <div>{activity.date}</div>
                 </div>
               </li>

@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import "./CustomerDashboard.css";
+import Profile from "./Profile";
+import TopNCustomer from "./TopNCustomer"
 import GetActivity from "./GetActivity";
 import TopnCustomer from "./TopNCustomer";
-
-function AdminDashboard({ user, onLogout }) {
+function CustomerDashboard({ user, onLogout }) {
+  const [balance, setBalance] = useState(String(user.balance));
   const [activeComponent, setActiveComponent] = useState(null);
+  const [showFundsMenu, setShowFundsMenu] = useState(false); // Toggle funds submenu
 
   const renderComponent = () => {
     switch (activeComponent) {
+      case "profile":
+        return <Profile user={user} updatebalance={setBalance} onClose={() => setActiveComponent(null)} />;
       case "topncustomer":
-        return <TopnCustomer user={user} onClose={() => setActiveComponent(null)} />;
+        return <TopNCustomer user={user} updatebalance={setBalance} onClose={() => setActiveComponent(null)} />;
       case "activity":
-        return <GetActivity user={user} onClose={() => setActiveComponent(null)} />;
+        return <GetActivity user={user} updatebalance={setBalance} onClose={() => setActiveComponent(null)} />;
       default:
-        return <p>Select an operation from the left.</p>;
+        return <Profile user={user} updatebalance={setBalance} onClose={() => setActiveComponent(null)} />;
+
     }
   };
 
@@ -21,15 +27,19 @@ function AdminDashboard({ user, onLogout }) {
     <div className="dashboard-container">
       <div className="top-section">
         <h2>Welcome, {user.name}</h2>
-        {/* <p><strong>Account No:</strong> {user.accountno}</p> */}
         <p><strong>Customer ID:</strong> {user.userid}</p>
-        <p><strong>Mobile Number: </strong>{user.mobilenumber}</p>
-        <p><strong>Aadhaar No: </strong>{user.aadhaar}</p>
       </div>
       <div className="main-content">
         <div className="sidebar">
-          <button className="btn" onClick={() => setActiveComponent("topncustomer")}>Top N Customers</button>
-          <button className="btn" onClick={() => setActiveComponent("activity")}>Print Activity</button>
+          <button className="btn" onClick={() => setActiveComponent("profile")}>Profile</button>
+          <button className="btn" onClick={() => setShowFundsMenu(!showFundsMenu)}>Funds</button>
+          {showFundsMenu && (
+            <div className="submenu">
+              <button className="btn" onClick={() => setActiveComponent("topncustomer")}>Top N Customers</button>
+              <button className="btn" onClick={() => setActiveComponent("activity")}>Activity History</button>
+            </div>
+          )}
+          {/* <button className="btn" onClick={() => setActiveComponent("transaction")}>Funds</button> */}
           <button className="btn logout" onClick={onLogout}>Logout</button>
         </div>
         <div className="content-area">
@@ -40,45 +50,4 @@ function AdminDashboard({ user, onLogout }) {
   );
 }
 
-export default AdminDashboard;
-
-
-// import React ,{useState} from "react";
-// import "./AdminDashboard.css";
-// import GetActivity from "./GetActivity"
-// import TopNCustomer from "./TopNCustomer"
-// function AdminDashboard({ user, onLogout }) {
-
-//   const [showGetActivity, setShowGetActivity] = useState(false);
-//   const [showTopNCustomer, setShowTopNCustomer] = useState(false);
-  
-//   return (
-//     <>
-//     <div className="dashboard-container">
-//       <h2>Admin: {user.name}</h2>
-//       <p>Admin Customer ID: {user.userid}</p>
-
-//       <button
-//         onClick={() => setShowTopNCustomer(true)}
-//       >
-//         Get Top N Customers
-//       </button>
-//       <button
-//         onClick={() => setShowGetActivity(true)}
-//       >
-//         Print Transactions
-//       </button>
-
-//       <button onClick={onLogout}>Logout</button>
-//     </div>
-//     {showGetActivity && (
-//       <GetActivity user={user} onClose={() => setShowGetActivity(false)} />
-//     )}
-//     {showTopNCustomer && (
-//       <TopNCustomer user={user} onClose={() => setShowTopNCustomer(false)} />
-//     )}
-//     </>
-//   );
-// }
-
-// export default AdminDashboard;
+export default CustomerDashboard;

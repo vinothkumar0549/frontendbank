@@ -65,6 +65,13 @@ export const apiSlice = createApi({
       }),
       transformResponse: (response) => response.Users || [] // Ensure array
     }),
+    updateuserprofile: builder.mutation({
+      query: (updateuserprofileData) => ({
+        url:"/updateprofile",
+        method: "PUT",
+        body: updateuserprofileData,
+      })
+    }),
     logout: builder.mutation({
       query:(logoutData) => ({
         url: "/logout",
@@ -84,5 +91,6 @@ export const {
   useGetactivityMutation,
   useGettransactionMutation,
   useTopncustomerMutation,
+  useUpdateuserprofileMutation,
   useLogoutMutation
  } = apiSlice;
