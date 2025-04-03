@@ -41,17 +41,26 @@ function CustomerDashboard({ user, onLogout }) {
     }
   };
 
+  const toggleBalance = () => {
+    setShowBalance(true);
+
+    // Hide balance after 5 seconds
+    setTimeout(() => {
+      setShowBalance(false);
+    }, 5000);
+  };
+
   return (
     <div className="dashboard-container">
       <div className="top-section">
         <h2>Welcome, {user.name}</h2>
         <p><strong>Customer ID: </strong> {user.userid}</p>
         <p>
-          <strong>Balance: </strong>  
-          <span>
-            {showBalance ? `₹  ${user.balance} ` : "******"}
-            <button onClick={() => setShowBalance(!showBalance)} 
-              style={{ background: "none", border: "none", cursor: "pointer", padding: "0", margin: "10px" }}
+          <strong>Balance: ₹ </strong>  
+          <span style={{display: "inline-flex"}}>
+            {showBalance ? ` ${user.balance} ` : "******"}
+            <button onClick={toggleBalance} 
+              style={{ background: "none", border: "none", cursor: "pointer", padding: "0", marginLeft: "10px" }}
             >
             <FontAwesomeIcon icon={showBalance ? faEyeSlash : faEye} />
             </button>
