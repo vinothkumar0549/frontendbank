@@ -74,6 +74,23 @@ function App() {
     e.preventDefault();
     setError(null);
 
+    const newErrors = {};
+  let hasError = false;
+
+  Object.keys(formData).forEach((key) => {
+    // Only validate fields required for the current form mode
+    if (isLogin && (key === "customerId" || key === "password")) {
+      newErrors[key] = validateInput(key, formData[key]);
+    } else if (!isLogin && key !== "customerId") {
+      newErrors[key] = validateInput(key, formData[key]);
+    }
+
+    if (newErrors[key]) hasError = true;
+  });
+
+  setValidationErrors(newErrors);
+
+  if (hasError) return; // stop if any errors exist
     // // Perform full validation on submit
     // const newErrors = {};
     // Object.keys(formData).forEach((key) => {
