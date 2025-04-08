@@ -4,7 +4,10 @@ import Home from "./Home"
 import Profile from "./Profile";
 import TopNCustomer from "./TopNCustomer"
 import GetActivity from "./GetActivity";
-function AdminDashboard({ user, onLogout }) {
+import ChangePassword from "./ChangePassword";
+
+function AdminDashboard({ user, setUser, onLogout }) {
+
   const [activeComponent, setActiveComponent] = useState(null);
   const [showFundsMenu, setShowFundsMenu] = useState(false); // Toggle funds submenu
   const [showActivityMenu, setShowActivityMenu] = useState(false);
@@ -15,6 +18,8 @@ function AdminDashboard({ user, onLogout }) {
         return <Home user={user} onClose={() => setActiveComponent(null)} />;
       case "profile":
         return <Profile user={user} onClose={() => setActiveComponent(null)} />;
+      case "changepassword":
+        return <ChangePassword user = {user} setuser = {setUser} onClose={() => setActiveComponent(onLogout)} />
       case "topncustomer":
         return <TopNCustomer user={user} onClose={() => setActiveComponent(null)} />;
       case "activity":
@@ -41,9 +46,10 @@ function AdminDashboard({ user, onLogout }) {
           {showActivityMenu && (
             <div className="submenu">
               <button className="btn" onClick={() => setActiveComponent("activity")}>Activity History</button>
+              <button className="btn" onClick={() => setActiveComponent("changepassword")}>Change Password</button>
             </div>
           )}
-          <button className="btn" onClick={() => setShowFundsMenu(!showFundsMenu)}>Funds</button>
+          <button className="btn" onClick={() => setShowFundsMenu(!showFundsMenu)}>Admin Operations</button>
           {showFundsMenu && (
             <div className="submenu">
               <button className="btn" onClick={() => setActiveComponent("topncustomer")}>Top N Customers</button>

@@ -5,8 +5,11 @@ import store from "./store.jsx"; // Ensure this is the correct store import
 import App from "./App";
 
 
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <App />
   </Provider>
+
+  
 );

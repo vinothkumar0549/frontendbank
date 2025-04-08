@@ -7,30 +7,36 @@ import Deposit from "./Deposit";
 import MoneyTransfer from "./MoneyTransfer";
 import GetTransaction from "./GetTransaction";
 import GetActivity from "./GetActivity";
+import ChangePassword  from "./ChangePassword";
+import App from "./App";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
-function CustomerDashboard({ user, onLogout }) {
+function CustomerDashboard({ user, setUser, onLogout }) {
   const [balance, setBalance] = useState(String(user.balance));
   const [activeComponent, setActiveComponent] = useState(null);
   const [showFundsMenu, setShowFundsMenu] = useState(false); // Toggle funds submenu
   const [showActivity, setShowActivity] = useState(false);
   const [showBalance, setShowBalance] = useState(false);
+  const [changepassword, setchangepassword] = useState (false);
 
-
-  const renderComponent = () => {
+  const renderComponent = () =>{
     switch (activeComponent) {
+      case "main":
+        return <App />
       case "home":
         return <Home user={user} updatebalance={setBalance} onClose={() => setActiveComponent(null)} />;
       case "profile":
         return <Profile user={user} balance = {balance} onClose={() => setActiveComponent(null)} />;
+      case "changepassword":
+        return <ChangePassword user = {user} setuser = {setUser} onClose={() => setActiveComponent(onLogout)} />
       case "withdraw":
-        return <Withdraw user={user} updatebalance={setBalance} onClose={() => setActiveComponent(null)} />;
+        return <Withdraw user={user} setchangepassword= {setchangepassword} updatebalance={setBalance} onClose={() => setActiveComponent(null)} />;
       case "deposit":
-        return <Deposit user={user} updatebalance={setBalance} onClose={() => setActiveComponent(null)} />;
+        return <Deposit user={user} setchangepassword= {setchangepassword} updatebalance={setBalance} onClose={() => setActiveComponent(null)} />;
       case "moneytransfer":
-        return <MoneyTransfer user={user} updatebalance={setBalance} onClose={() => setActiveComponent(null)} />;
+        return <MoneyTransfer user={user} setchangepassword= {setchangepassword} updatebalance={setBalance} onClose={() => setActiveComponent(null)} />;
       case "transaction":
         return <GetTransaction user={user} updatebalance={setBalance} onClose={() => setActiveComponent(null)} />;
       case "activity":
@@ -58,7 +64,7 @@ function CustomerDashboard({ user, onLogout }) {
         <p>
           <strong>Balance: ₹ </strong>  
           <span style={{display: "inline-flex"}}>
-            {showBalance ? ` ${user.balance} ` : "******"}
+            {showBalance ? ` ${balance} ` : "******"}
             <button onClick={toggleBalance} 
               style={{ background: "none", border: "none", cursor: "pointer", padding: "0", marginLeft: "10px" }}
             >
@@ -77,14 +83,15 @@ function CustomerDashboard({ user, onLogout }) {
           {showActivity && (
             <div className="submenu">
               <button className="btn" onClick={() => setActiveComponent("activity")}>Activity History</button>
+              <button className="btn" onClick={() => setActiveComponent("changepassword")}>Change Password</button>
             </div>
           )}
           <button className="btn" onClick={() => setShowFundsMenu(!showFundsMenu)}>Funds</button>
           {showFundsMenu && (
             <div className="submenu">
-              <button className="btn" onClick={() => setActiveComponent("withdraw")}>Withdraw</button>
-              <button className="btn" onClick={() => setActiveComponent("deposit")}>Deposit</button>
-              <button className="btn" onClick={() => setActiveComponent("moneytransfer")}>Money Transfer</button>
+              <button className="btn" disabled={changepassword} onClick={() => setActiveComponent("withdraw")}>Withdraw</button>
+              <button className="btn" disabled={changepassword} onClick={() => setActiveComponent("deposit")}>Deposit</button>
+              <button className="btn" disabled={changepassword} onClick={() => setActiveComponent("moneytransfer")}>Money Transfer</button>
               <button className="btn" onClick={() => setActiveComponent("transaction")}>Transaction History</button>
               {/* <button className="btn" onClick={() => setActiveComponent("activity")}>Activity History</button> */}
             </div>

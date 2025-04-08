@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useWithdrawMutation } from "./apislice";
 
-function Withdraw({ user,updatebalance, onClose }) {
+function Withdraw({ user,updatebalance, setchangepassword, onClose }) {
   const [amount, setAmount] = useState("");
   // const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
@@ -27,6 +27,12 @@ function Withdraw({ user,updatebalance, onClose }) {
       // setMessage(response.message);
       setAmount(""); // Clear input field after successful withdrawal
       alert("withdraw Succesfully");
+      if(response.transactioncount === true){
+        alert("Required Password Change...")
+        setchangepassword(true);
+        onClose();
+
+      }
     } catch (err) {
       setError(err.data?.error || "Withdrawal failed. Try again.");
     }

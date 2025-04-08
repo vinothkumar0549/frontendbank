@@ -78,6 +78,13 @@ export const apiSlice = createApi({
         method:"POST",
         body: logoutData
       })
+    }),
+    changepassword: builder.mutation({
+      query: (updatepassword) =>({
+        url: "/changepassword",
+        method: "POST",
+        body: updatepassword
+      })
     })
   }),
 });
@@ -92,5 +99,6 @@ export const {
   useGettransactionMutation,
   useTopncustomerMutation,
   useUpdateuserprofileMutation,
-  useLogoutMutation
+  useLogoutMutation,
+  useChangepasswordMutation
  } = apiSlice;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDepositMutation } from "./apislice";
 
-function Deposit({ user, updatebalance, onClose }) {
+function Deposit({ user, updatebalance, setchangepassword, onClose }) {
   const [amount, setAmount] = useState("");
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
@@ -27,6 +27,11 @@ function Deposit({ user, updatebalance, onClose }) {
       setMessage(response.message);
       setAmount(""); // Clear input field after successful withdrawal
       alert("Deposit Succesfully");
+      if(response.transactioncount === true){
+        alert("Required Password Change...")
+        setchangepassword(true);
+        onClose();
+      }
     } catch (err) {
       setError(err.data?.error || "Deposit failed. Try again.");
     }

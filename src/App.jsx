@@ -5,6 +5,7 @@ import AdminDashboard from "./AdminDashboard";
 import "./App.css";
 
 function App() {
+
   const [isLogin, setIsLogin] = useState(true);
   const [role, setRole] = useState("customer");
   const [formData, setFormData] = useState({
@@ -137,9 +138,9 @@ function App() {
 
   if (user) {
     return user.role === "customer" ? (
-      <CustomerDashboard user={user} onLogout={handleLogout} />
+      <CustomerDashboard user={user} setuser = {setUser} onLogout={handleLogout} />
     ) : (
-      <AdminDashboard user={user} onLogout={handleLogout} />
+      <AdminDashboard user={user} setuser = {setUser} onLogout={handleLogout} />
     );
   }
 

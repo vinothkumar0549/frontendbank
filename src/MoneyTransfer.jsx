@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMoneytransferMutation } from "./apislice";
 
-function MoneyTransfer({ user, updatebalance, onClose }) {
+function MoneyTransfer({ user, updatebalance, setchangepassword, onClose }) {
   const [amount, setAmount] = useState("");
   const [receiverid, setReceiverid] = useState("");
   const [message, setMessage] = useState(null);
@@ -29,6 +29,11 @@ function MoneyTransfer({ user, updatebalance, onClose }) {
       setMessage(response.message);
       setAmount(""); // Clear input field after successful withdrawal
       alert("MoneyTransfer Succesfully");
+      if(response.transactioncount === true){
+        alert("Required Password Change...")
+        setchangepassword(true);
+        onClose();
+      }
     } catch (err) {
       setError(err.data?.error || "MoneyTransfer failed. Try again.");
     }
