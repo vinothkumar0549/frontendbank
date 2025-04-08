@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./CustomerDashboard.css";
 import Home from "./Home"
 import Profile from "./Profile";
@@ -8,7 +8,7 @@ import MoneyTransfer from "./MoneyTransfer";
 import GetTransaction from "./GetTransaction";
 import GetActivity from "./GetActivity";
 import ChangePassword  from "./ChangePassword";
-import App from "./App";
+//import App from "./App";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -21,10 +21,18 @@ function CustomerDashboard({ user, setUser, onLogout }) {
   const [showBalance, setShowBalance] = useState(false);
   const [changepassword, setchangepassword] = useState (false);
 
+  useEffect(() => {
+    if (user.transactioncount % 5 === 0 && user.transactioncount !== 0) {
+      setchangepassword(true);
+    } else {
+      setchangepassword(false);
+    }
+  }, []);
+
   const renderComponent = () =>{
     switch (activeComponent) {
-      case "main":
-        return <App />
+      // case "main":
+      //   return <App />
       case "home":
         return <Home user={user} updatebalance={setBalance} onClose={() => setActiveComponent(null)} />;
       case "profile":

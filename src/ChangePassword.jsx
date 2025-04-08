@@ -9,7 +9,7 @@ const ChangePassword = ({ user, setuser, onClose }) => {
 
   const [changepassword, { isLoading }] = useChangepasswordMutation();
 
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,15}$/;
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,6 +24,10 @@ const ChangePassword = ({ user, setuser, onClose }) => {
 
     if (newPassword !== confirmPassword) {
       setError('Passwords do not match');
+      return;
+    }
+    if (confirmPassword === user.password){
+      setError('Old and New Password is Same');
       return;
     }
 
