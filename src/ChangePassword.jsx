@@ -81,7 +81,8 @@ const ChangePassword = ({ user, setuser, onClose }) => {
               title="8-15 characters with at least one lowercase, one uppercase, one number, and one special character."
             />
           </div>
-          {error && <p className="text-red-600 mb-2">{error}</p>}
+          {error && <p className="text-red-600 mb-2" style={{ color: 'red', marginBottom: '0.5rem' }}>{error}</p>}
+
           <button
             type="submit"
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"

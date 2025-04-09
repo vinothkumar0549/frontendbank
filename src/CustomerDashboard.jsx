@@ -21,13 +21,13 @@ function CustomerDashboard({ user, setUser, onLogout }) {
   const [showBalance, setShowBalance] = useState(false);
   const [changepassword, setchangepassword] = useState (false);
 
-  useEffect(() => {
-    if (user.transactioncount % 5 === 0 && user.transactioncount !== 0) {
-      setchangepassword(true);
-    } else {
-      setchangepassword(false);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (user.transactioncount % 5 === 0 && user.transactioncount !== 0) {
+  //     setchangepassword(true);
+  //   } else {
+  //     setchangepassword(false);
+  //   }
+  // }, []);
 
   const renderComponent = () =>{
     switch (activeComponent) {
